@@ -57,6 +57,7 @@ migrate()
     });
   })
   .catch((err) => {
-    console.error('❌ Gagal koneksi ke database:', err.message);
-    process.exit(1);
-  });
+  console.error('❌ Gagal koneksi ke database:');
+  console.error(err);
+  process.exit(1);
+});
