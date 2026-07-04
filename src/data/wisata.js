@@ -36,14 +36,10 @@ module.exports = {
   create: async (data) => {
   const { nama, lokasi, kategori, deskripsi, gambar, rating, harga } = data;
 
-  console.log('DATA MAU DISIMPAN:', data);
-
   const [result] = await pool.query(
     'INSERT INTO wisata (nama, lokasi, kategori, deskripsi, gambar, rating, harga) VALUES (?, ?, ?, ?, ?, ?, ?)',
     [nama, lokasi, kategori, deskripsi, gambar, rating, harga]
   );
-
-  console.log('HASIL INSERT:', result);
 
   return { id: result.insertId, ...data };
 },

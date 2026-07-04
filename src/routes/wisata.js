@@ -39,10 +39,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
-    console.log('BODY:', req.body);
-
     const { nama, lokasi, kategori, deskripsi, gambar, rating, harga } = req.body;
 
     const newItem = await wisata.create({
@@ -55,22 +53,19 @@ router.post('/', async (req, res) => {
       harga: harga || 'Gratis'
     });
 
-    console.log('DATA TERSIMPAN:', newItem);
-
     res.status(201).json({
       success: true,
       message: 'Wisata berhasil ditambahkan',
       data: newItem
     });
   } catch (e) {
-    console.error('ERROR:', e);
     res.status(500).json({
       success: false,
       message: e.message
     });
   }
 });
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
     const updated = await wisata.update(req.params.id, req.body);
     if (!updated) return res.status(404).json({ success: false, message: 'Wisata tidak ditemukan' });
@@ -80,7 +75,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
     const ok = await wisata.remove(req.params.id);
     if (!ok) return res.status(404).json({ success: false, message: 'Wisata tidak ditemukan' });

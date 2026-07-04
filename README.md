@@ -34,6 +34,8 @@ DB_PASSWORD=        ← isi password MySQL kamu (kosong jika tidak ada)
 DB_NAME=ilham_aja
 ```
 
+> `.env` otomatis terbaca lewat package `dotenv` (dipanggil di baris pertama `server.js`). Saat di-deploy ke Railway, variabel `MYSQLHOST`/`MYSQLUSER`/dst. yang disuntikkan platform tetap dipakai duluan — jadi tidak perlu `.env` di production.
+
 ---
 
 ## 🚀 Cara Menjalankan
